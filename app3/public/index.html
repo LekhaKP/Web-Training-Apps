@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel='stylesheet' href='/style.css' />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+
+  </head>
+  <body>
+<script type="text/javascript">
+        
+        function show() {
+            var vis = document.getElementById("search_popup").style;
+            if(vis.visibility == "hidden"){
+                vis.visibility = "visible";
+                document.getElementById("searchInput").value="";
+            }
+            else{
+                vis.visibility = "hidden";
+            }
+        }
+        function showLoginPopUp() {
+        	var popup = document.getElementById('myPopup');
+    		popup.classList.toggle('show');
+        }
+</script>
+<div class="header">
+
+<ul>
+  <li><img id="logo_icon" src="\images\qb.png"></li>
+  <li class="dropdown">
+    <a href="#" class="dropbtn">Partners</a>
+    <div class="dropdown-content">
+      <a href="#">National Geography</a>
+      <a href="#">Hp</a>
+      <a href="#">Omron</a>
+    </div>
+  </li>
+  <li><a href="#news">About</a></li>
+  
+  <li style="float:right;">
+  <a class="" href="#" onclick="document.getElementById('id01').style.display='block'">
+  <i class="fa fa-user" aria-hidden="true"></i>
+  </a>
+  </li>
+  <li style="float:right;"><a class="shown" href="#" onclick="show();"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+  <li style="float:right;">
+  <span id="search_popup" style="visibility: hidden;">
+            <form id="searchForm" action="/india/search/search-results.html">
+                <div class="search-field">
+                    <input id="searchInput" class="base-font02" title="search" accesskey="4" name="Query" type="search">
+                </div>
+            </form>              
+    </span>
+    </li>
+</ul>
+</div>
+
+
+ <div class="slideshow-container" >
+  <div class="mySlides fade">
+    <div class="numbertext">1 / 3</div>
+    <img src="/images/img1.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">2 / 3</div>
+    <img src="/images/img2.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">3 / 3</div>
+    <img src="/images/img3.jpg" style="width:100%">
+  </div>
+
+  <a class="prev" style="position:absolute; top:50%; left:3%;" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" style="position:absolute; top:50%; right:3%;" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<br>
+
+<div style="text-align:center;position:absolute;top:70%;right:50%;">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+
+
+<!--video style="position:absolute; margin-top:50%" controls>
+	<source src="/images/movie.ogg" type="video/ogg">
+	Your browser does not support the video tag.
+</video-->
+
+
+
+
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="action_page.php">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="/images/log_icon.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+        
+      <button type="submit">Login</button>
+      <input type="checkbox" checked="checked"> Remember me
+    </div>
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#" >password?</a></span>
+      <span class="new"><a href="#" onclick="loadDoc()">Create new account</a></span>
+    </div>
+  </form>
+</div>
+<div id="id02" class="modal"></div>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+
+
+function loadDoc() {
+  document.getElementById('id01').style.display='none';
+  document.getElementById('id02').style.display='block';
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('id02').innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "register.html", true);
+  xhttp.send();
+}
+</script>
+</body>
+</html>
