@@ -39,7 +39,7 @@
   <li><a href="#news">About</a></li>
   
   <li style="float:right;">
-  <a class="" href="#" onclick="document.getElementById('id01').style.display='block'">
+  <a class="" href="#" onclick="loadDoc(document.getElementById('id01'), null)">
   <i class="fa fa-user" aria-hidden="true"></i>
   </a>
   </li>
@@ -95,31 +95,7 @@
 
 
 
-<div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="action_page.php">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="/images/log_icon.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-
-      <label><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-        
-      <button type="submit">Login</button>
-      <input type="checkbox" checked="checked"> Remember me
-    </div>
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#" >password?</a></span>
-      <span class="new"><a href="#" onclick="loadDoc()">Create new account</a></span>
-    </div>
-  </form>
-</div>
+<div id="id01" class="modal"></div>
 <div id="id02" class="modal"></div>
 <script>
 // Get the modal
@@ -162,16 +138,24 @@ function showSlides(n) {
 }
 
 
-function loadDoc() {
-  document.getElementById('id01').style.display='none';
-  document.getElementById('id02').style.display='block';
+function loadDoc(next,prev) {
+  if(prev!=null) {
+    prev.style.display='none';
+  }
+  next.style.display='block';
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById('id02').innerHTML = this.responseText;
+      next.innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "register.html", true);
+  if (prev === null) {
+    xhttp.open("GET", "login.html", true);
+  }
+  else {
+    xhttp.open("GET", "register.html", true);
+  }
+  
   xhttp.send();
 }
 </script>
